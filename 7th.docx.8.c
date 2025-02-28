@@ -1,18 +1,24 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-float calculateIncomeTax(float salary) {
-    float annualSalary = salary * 12;
-    if (annualSalary < 600000) return 0;
-    else if (annualSalary <= 1200000) return annualSalary * 0.025;
-    else if (annualSalary <= 2400000) return annualSalary * 0.125;
-    else if (annualSalary <= 3600000) return annualSalary * 0.20;
-    else return annualSalary * 0.30;
+void showLoadSheddingSchedule(char city[]) {
+    srand(time(0));
+    char *days[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    printf("Load Shedding Schedule for %s:\n", city);
+    for (int i = 0; i < 7; i++) {
+        int start1 = rand() % 12;
+        int end1 = start1 + 2;
+        int start2 = rand() % 12 + 12;
+        int end2 = start2 + 2;
+        printf("%s: %d AM - %d AM, %d PM - %d PM\n", days[i], start1, end1, start2 - 12, end2 - 12);
+    }
 }
 
 int main() {
-    float salary;
-    printf("Enter monthly salary (PKR): ");
-    scanf("%f", &salary);
-    printf("Annual Tax = %.2f PKR\n", calculateIncomeTax(salary));
+    char city[50];
+    printf("Enter your city: ");
+    scanf("%s", city);
+    showLoadSheddingSchedule(city);
     return 0;
 }
